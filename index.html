@@ -1,0 +1,324 @@
+<!DOCTYPE html><html lang="en"><head><meta name="x-poe-datastore-behavior" content="local_only"><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CEIS — the Community Ran Encyclopedia of Integer Sequences. Explore, submit, and search integer sequences with resources for number theory enthusiasts.">
+  <meta name="keywords" content="integer sequences, number theory, OEIS alternative, CEIS, sequences database">
+  <meta name="author" content="Community Ran Encyclopedia of Integer Sequences (CEIS)">
+  <title>CEIS — Community Ran Encyclopedia of Integer Sequences</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Times New Roman", serif;
+      background-color: #ffffff;
+      color: #000000;
+    }
+    a {
+      color: #0000ee;
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #551a8b;
+    }
+    header {
+      background-color: #e5e5e5;
+      border-bottom: 1px solid #999;
+      padding: 8px 0;
+    }
+    .container {
+      width: 95%;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .masthead {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding: 4px 0;
+    }
+    .masthead h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+    .masthead small {
+      font-size: 14px;
+    }
+    nav {
+      margin-top: 6px;
+      border-top: 1px solid #999;
+      border-bottom: 1px solid #999;
+      padding: 4px 0;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 15px;
+    }
+    main {
+      padding: 16px 0 48px;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 22px;
+      border-bottom: 1px solid #999;
+      padding-bottom: 4px;
+    }
+    p {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .notice {
+      background-color: #f6f6f6;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 16px;
+    }
+    form {
+      border: 1px solid #999;
+      padding: 12px;
+      margin-top: 12px;
+      background-color: #fdfdfd;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    input[type="text"],
+    textarea {
+      width: 100%;
+      max-width: 100%;
+      font-family: inherit;
+      font-size: 15px;
+      padding: 6px;
+      border: 1px solid #999;
+      background-color: #ffffff;
+    }
+    textarea {
+      height: 120px;
+    }
+    button {
+      margin-top: 12px;
+      padding: 6px 16px;
+      font-size: 15px;
+      border: 1px solid #000;
+      background-color: #e6e6e6;
+      cursor: pointer;
+    }
+    button:disabled {
+      color: #666;
+      border-color: #666;
+      background-color: #f0f0f0;
+      cursor: default;
+    }
+    .status {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .status.success {
+      color: #006400;
+    }
+    .status.error {
+      color: #8b0000;
+    }
+    footer {
+      border-top: 1px solid #999;
+      padding: 14px 0;
+      text-align: center;
+      font-size: 14px;
+      background-color: #f0f0f0;
+      color: #333;
+    }
+    @media (max-width: 640px) {
+      .masthead h1 {
+        font-size: 22px;
+      }
+      nav ul {
+        gap: 8px;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+<script src="https://puc.poecdn.net/authenticated_preview_page/syncedState.3f7572448765332f3047.js"></script></head>
+<body>
+  <header>
+    <div class="container masthead">
+      <h1>Community Ran Encyclopedia of Integer Sequences (CEIS)</h1>
+      <small>Inspired by the OEIS — cataloging integer sequences for the number theory community.</small>
+    </div>
+    <div class="container">
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="recent.html">Recent Submissions</a></li>
+          <li><a href="search.html">Search &amp; Lookup</a></li>
+          <li><a href="faq.html">FAQ &amp; About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <div class="notice">
+        <strong>Welcome to the CEIS.</strong> This project is a community effort to document integer sequences.
+        Explore the latest submissions, search for known sequences, or contribute a new entry below.
+      </div>
+    </section>
+
+    <section id="submit">
+      <h2>Submit a New Sequence</h2>
+      <p>
+        Provide at least four integer terms separated by commas. Sequence identifiers follow the OEIS-style
+        convention (A000000, A000001, ...), and the next available ID will be assigned automatically.
+      </p>
+      <form id="submitForm" novalidate="">
+        <label for="sequenceName">Sequence Name</label>
+        <input id="sequenceName" name="sequenceName" type="text" placeholder="Example: Fibonacci numbers" required="">
+
+        <label for="sequenceAuthor">Author (optional)</label>
+        <input id="sequenceAuthor" name="sequenceAuthor" type="text" placeholder="Your name or leave blank for Anonymous">
+
+        <label for="sequenceData">Sequence Terms (at least four, comma-separated)</label>
+        <input id="sequenceData" name="sequenceData" type="text" placeholder="1, 1, 2, 3, 5, 8, ..." required="">
+
+        <label for="sequenceComments">Comments, references, or formulas (optional)</label>
+        <textarea id="sequenceComments" name="sequenceComments" placeholder="Include literature references, generating functions, or remarks."></textarea>
+
+        <button type="submit" id="submitButton">Submit Sequence</button>
+        <div id="submitStatus" class="status" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> CEIS — Community Ran Encyclopedia of Integer Sequences.
+  </footer>
+
+  <script>
+    const SUPABASE_URL = "https://ydaaftyvwtwkqvsjrhfe.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlkYWFmdHl2d3R3a3F2c2pyaGZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE2MDE5MTAsImV4cCI6MjA3NzE3NzkxMH0.-DvvZLFVzzLplO92KQw54T1YbLo9hzRjItsgxinXvL0";
+
+    const headers = {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+      "Content-Type": "application/json",
+      Prefer: "return=representation",
+    };
+
+    const submitForm = document.getElementById("submitForm");
+    const submitStatus = document.getElementById("submitStatus");
+    const submitButton = document.getElementById("submitButton");
+    const yearSpan = document.getElementById("year");
+
+    yearSpan.textContent = new Date().getFullYear();
+
+    function formatSequenceNumber(n) {
+      const num = parseInt(n, 10);
+      if (Number.isNaN(num) || num < 1) return "A000001";
+      return `A${String(num).padStart(6, "0")}`;
+    }
+
+    function validateSequenceTerms(raw) {
+      if (!raw) return { valid: false, message: "Please enter at least four terms." };
+      const parts = raw.split(",").map((term) => term.trim()).filter(Boolean);
+      if (parts.length < 4) {
+        return { valid: false, message: "At least four comma-separated terms are required." };
+      }
+      const invalid = parts.find((term) => !/^[-+]?\d+$/.test(term));
+      if (invalid) {
+        return { valid: false, message: `Each term must be an integer. Invalid term: "${invalid}".` };
+      }
+      return { valid: true, normalized: parts.join(", ") };
+    }
+
+    async function getNextSequenceNumber() {
+      const params = new URLSearchParams({
+        select: "sequence_number",
+        order: "sequence_number.desc",
+        limit: "1",
+      });
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/sequences?${params.toString()}`, { headers });
+      if (!response.ok) throw new Error("Unable to determine next sequence number.");
+      const [latest] = await response.json();
+      if (!latest || !latest.sequence_number) return formatSequenceNumber(1);
+      const numeric = parseInt(latest.sequence_number.slice(1), 10) + 1;
+      return formatSequenceNumber(numeric);
+    }
+
+    async function submitSequence(event) {
+      event.preventDefault();
+      submitStatus.textContent = "";
+      submitStatus.className = "status";
+      submitButton.disabled = true;
+
+      const name = submitForm.sequenceName.value.trim();
+      const author = submitForm.sequenceAuthor.value.trim();
+      const dataRaw = submitForm.sequenceData.value.trim();
+      const comments = submitForm.sequenceComments.value.trim();
+
+      if (!name) {
+        submitStatus.textContent = "Sequence name is required.";
+        submitStatus.classList.add("error");
+        submitButton.disabled = false;
+        return;
+      }
+
+      const validation = validateSequenceTerms(dataRaw);
+      if (!validation.valid) {
+        submitStatus.textContent = validation.message;
+        submitStatus.classList.add("error");
+        submitButton.disabled = false;
+        return;
+      }
+
+      try {
+        submitStatus.textContent = "Assigning sequence number…";
+        const sequence_number = await getNextSequenceNumber();
+
+        const payload = {
+          name,
+          author: author || null,
+          data: validation.normalized,
+          comments: comments || null,
+          sequence_number,
+        };
+
+        submitStatus.textContent = "Submitting sequence…";
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/sequences`, {
+          method: "POST",
+          headers,
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          const details = await response.text();
+          throw new Error(details || "Submission failed.");
+        }
+
+        submitStatus.textContent = `Success. Sequence recorded as ${sequence_number}.`;
+        submitStatus.classList.add("success");
+        submitForm.reset();
+      } catch (error) {
+        console.error(error);
+        submitStatus.textContent = `Error: ${error.message}`;
+        submitStatus.classList.add("error");
+      } finally {
+        submitButton.disabled = false;
+      }
+    }
+
+    submitForm.addEventListener("submit", submitSequence);
+  </script>
+
+
+</body></html>
