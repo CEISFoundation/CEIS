@@ -253,7 +253,7 @@
 
         var seqNum = row.sequence_number ? escapeHtml(row.sequence_number) : "A??????";
         var title = row.name ? escapeHtml(row.name) : "Untitled Sequence";
-        var author = row.author && row.author.trim() ? escapeHtml(row.author.trim()) : "Anonymous";
+        var author = row.authors && row.authors.trim() ? escapeHtml(row.authors.trim()) : "Anonymous";
         var createdAt = row.created_at ? new Date(row.created_at).toLocaleString() : "Unknown date";
         var data = row.data ? escapeHtml(row.data) : "(no data provided)";
         var comments = row.comments && row.comments.trim() ? "<p>" + escapeHtml(row.comments.trim()) + "</p>" : "";
@@ -296,7 +296,8 @@
 
         var filters = [
           "sequence_number.ilike.%"+ query.replace(/%/g, "\\%").replace(/_/g, "\\_") +"%",
-          "name.ilike.%"+ query.replace(/%/g, "\\%").replace(/_/g, "\\_") +"%"
+          "name.ilike.%"+ query.replace(/%/g, "\\%").replace(/_/g, "\\_") +"%",
+          "authors.ilike.%"+ query.replace(/%/g, "\\%").replace(/_/g, "\\_") +"%"
         ];
 
         var numericPattern = query.replace(/\s+/g, "");
