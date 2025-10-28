@@ -296,8 +296,7 @@
 
         var filters = [
           "sequence_number.ilike.%"+ query.replace(/%/g, "\\%").replace(/_/g, "\\_") +"%",
-          "name.ilike.%"+ query.replace(/%/g, "\\%").replace(/_/g, "\\_") +"%",
-          "author.ilike.%"+ query.replace(/%/g, "\\%").replace(/_/g, "\\_") +"%"
+          "name.ilike.%"+ query.replace(/%/g, "\\%").replace(/_/g, "\\_") +"%"
         ];
 
         var numericPattern = query.replace(/\s+/g, "");
