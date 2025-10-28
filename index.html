@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The On-Line Encyclopedia of Integer Sequences® (OEIS®)</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+        
+        .header {
+            background-color: #ffffff;
+            border-bottom: 2px solid #000000;
+            padding: 10px 20px;
+        }
+        
+        .header h1 {
+            margin: 5px 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .header p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        .nav {
+            background-color: #e0e0e0;
+            padding: 5px 20px;
+            border-bottom: 1px solid #000000;
+        }
+        
+        .nav a {
+            color: #0000ee;
+            text-decoration: underline;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+        
+        .nav a:visited {
+            color: #551a8b;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .search-box {
+            border: 2px solid #000000;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .search-box h2 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+        
+        .search-box input[type="text"] {
+            width: 70%;
+            padding: 5px;
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+            border: 1px solid #000000;
+        }
+        
+        .search-box input[type="submit"] {
+            padding: 5px 15px;
+            font-size: 14px;
+            background-color: #d0d0d0;
+            border: 2px outset #d0d0d0;
+            cursor: pointer;
+        }
+        
+        .search-box input[type="submit"]:active {
+            border: 2px inset #d0d0d0;
+        }
+        
+        .submit-box {
+            border: 2px solid #000000;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #ffffdd;
+        }
+        
+        .submit-box h2 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+        
+        .submit-box textarea {
+            width: 95%;
+            height: 60px;
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+            border: 1px solid #000000;
+            padding: 5px;
+        }
+        
+        .submit-box input[type="text"] {
+            width: 95%;
+            padding: 5px;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 14px;
+            border: 1px solid #000000;
+            margin-bottom: 10px;
+        }
+        
+        .results {
+            margin-top: 20px;
+        }
+        
+        .sequence-entry {
+            border: 1px solid #000000;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #ffffff;
+        }
+        
+        .sequence-number {
+            font-weight: bold;
+            color: #cc0000;
+            font-size: 16px;
+        }
+        
+        .sequence-data {
+            font-family: "Courier New", monospace;
+            margin: 5px 0;
+            font-size: 13px;
+        }
+        
+        .sequence-name {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        .footer {
+            border-top: 2px solid #000000;
+            padding: 10px 20px;
+            margin-top: 30px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .recent-sequences {
+            margin-top: 20px;
+        }
+        
+        .recent-sequences h3 {
+            font-size: 16px;
+            border-bottom: 1px solid #000000;
+            padding-bottom: 5px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        table td {
+            border: 1px solid #000000;
+            padding: 5px;
+            font-size: 13px;
+        }
+        
+        table td:first-child {
+            font-family: "Courier New", monospace;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>The On-Line Encyclopedia of Integer Sequences® (OEIS®)</h1>
+        <p>Community-driven sequence database | Submit sequences anonymously</p>
+    </div>
+    
+    <div class="nav">
+        <a href="#search">Search</a>
+        <a href="#submit">Submit</a>
+        <a href="#recent">Recent</a>
+        <a href="#about">About</a>
+        <a href="#help">Help</a>
+    </div>
+    
+    <div class="container">
+        <div class="search-box" id="search">
+            <h2>Search Sequences</h2>
+            <form id="searchForm">
+                <input type="text" id="searchInput" placeholder="Enter sequence terms (e.g., 1,1,2,3,5,8) or keywords" />
+                <input type="submit" value="Search" />
+            </form>
+            <p style="font-size: 12px; margin-top: 10px;">
+                <b>Examples:</b> "1,1,2,3,5,8" or "fibonacci" or "prime numbers"
+            </p>
+        </div>
+        
+        <div class="submit-box" id="submit">
+            <h2>Submit a New Sequence</h2>
+            <form id="submitForm">
+                <p><b>Sequence terms:</b> (comma-separated)</p>
+                <textarea id="sequenceInput" placeholder="e.g., 1, 1, 2, 3, 5, 8, 13, 21, 34, 55"></textarea>
+                
+                <p><b>Name/Description:</b></p>
+                <input type="text" id="nameInput" placeholder="e.g., Fibonacci numbers" />
+                
+                <p><b>Comments (optional):</b></p>
+                <textarea id="commentsInput" placeholder="Additional information, formula, references, etc." style="height: 80px;"></textarea>
+                
+                <br>
+                <input type="submit" value="Submit Sequence" style="margin-top: 10px;" />
+            </form>
+        </div>
+        
+        <div id="searchResults" class="results" style="display: none;">
+            <h3>Search Results:</h3>
+            <div id="resultsContainer"></div>
+        </div>
+        
+        <div class="recent-sequences" id="recent">
+            <h3>Recently Submitted Sequences</h3>
+            <div id="recentContainer">
+                <p style="padding: 10px;">Loading recent sequences...</p>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 15px; background-color: #f0f0f0; border: 1px solid #000000;">
+            <h3 style="margin-top: 0;">About This Site</h3>
+            <p style="font-size: 14px;">
+                This is a community-driven encyclopedia of integer sequences. Anyone can submit sequences 
+                anonymously without registration. All submissions are immediately visible to the public.
+            </p>
+            <p style="font-size: 14px;">
+                <b>Note:</b> This is an independent project inspired by the original OEIS. 
+            </p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Community Integer Sequence Database | Submissions are anonymous and immediate</p>
+        <p>Lookup: <a href="#search">Sequence Search</a> | <a href="#submit">Submit New</a> | <a href="#recent">Recent Additions</a></p>
+    </div>
+    
+    <script>
+        // Supabase configuration
+        const SUPABASE_URL = 'https://ydaaftyvwtwkqvsjrhfe.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlkYWFmdHl2d3R3a3F2c2pyaGZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE2MDE5MTAsImV4cCI6MjA3NzE3NzkxMH0.-DvvZLFVzzLplO92KQw54T1YbLo9hzRjItsgxinXvL0';
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        window.addEventListener('DOMContentLoaded', function() {
+            loadRecentSequences();
+        });
+
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = document.getElementById('searchInput').value.trim();
+            if (searchTerm) {
+                searchSequences(searchTerm);
+            }
+        });
+
+        document.getElementById('submitForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitSequence();
+        });
+
+        async function searchSequences(searchTerm) {
+            const resultsContainer = document.getElementById('resultsContainer');
+            const searchResults = document.getElementById('searchResults');
+            
+            resultsContainer.innerHTML = '<p>Searching...</p>';
+            searchResults.style.display = 'block';
+            
+            const { data, error } = await supabase
+                .from('sequences')
+                .select('*')
+                .or(`data.ilike.%${searchTerm}%,name.ilike.%${searchTerm}%`)
+                .order('created_at', { ascending: false });
+            
+            if (error) {
+                resultsContainer.innerHTML = '<p>Error searching sequences: ' + error.message + '</p>';
+                console.error(error);
+                return;
+            }
+            
+            if (data.length === 0) {
+                resultsContainer.innerHTML = '<p>No sequences found matching your search.</p>';
+            } else {
+                resultsContainer.innerHTML = data.map(seq => `
+                    <div class="sequence-entry">
+                        <div class="sequence-number">${seq.sequence_number}</div>
+                        <div class="sequence-data">${seq.data}</div>
+                        <div class="sequence-name">${seq.name}</div>
+                        ${seq.comments ? `<p style="font-size: 12px; margin-top: 5px;">${seq.comments}</p>` : ''}
+                    </div>
+                `).join('');
+            }
+        }
+
+        async function submitSequence() {
+            const sequenceData = document.getElementById('sequenceInput').value.trim();
+            const name = document.getElementById('nameInput').value.trim();
+            const comments = document.getElementById('commentsInput').value.trim();
+            
+            if (!sequenceData || !name) {
+                alert('Please provide both sequence terms and a name/description.');
+                return;
+            }
+            
+            // Get the next sequence number
+            const { data: existingSeqs, error: countError } = await supabase
+                .from('sequences')
+                .select('id')
+                .order('id', { ascending: false })
+                .limit(1);
+            
+            const nextNumber = existingSeqs && existingSeqs.length > 0 ? existingSeqs[0].id + 1 : 1;
+            const sequenceNumber = 'A' + String(nextNumber).padStart(6, '0');
+            
+            const { data, error } = await supabase
+                .from('sequences')
+                .insert([{
+                    sequence_number: sequenceNumber,
+                    data: sequenceData,
+                    name: name,
+                    comments: comments || null
+                }])
+                .select();
+            
+            if (error) {
+                alert('Error submitting sequence: ' + error.message);
+                console.error(error);
+                return;
+            }
+            
+            alert('Sequence submitted successfully! ID: ' + sequenceNumber);
+            
+            document.getElementById('sequenceInput').value = '';
+            document.getElementById('nameInput').value = '';
+            document.getElementById('commentsInput').value = '';
+            
+            loadRecentSequences();
+        }
+
+        async function loadRecentSequences() {
+            const recentContainer = document.getElementById('recentContainer');
+            
+            const { data, error } = await supabase
+                .from('sequences')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(10);
+            
+            if (error) {
+                console.error(error);
+                recentContainer.innerHTML = '<p style="padding: 10px;">Error loading sequences: ' + error.message + '</p>';
+                return;
+            }
+            
+            if (!data || data.length === 0) {
+                recentContainer.innerHTML = '<p style="padding: 10px;">No sequences yet. Be the first to submit!</p>';
+                return;
+            }
+            
+            recentContainer.innerHTML = data.map(seq => `
+                <table style="margin-bottom: 15px;">
+                    <tr>
+                        <td style="width: 15%;">${seq.sequence_number}</td>
+                        <td>${seq.data}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="background-color: #ffffff; font-size: 12px;">
+                            ${seq.name}
+                            ${seq.comments ? `<br><i>${seq.comments}</i>` : ''}
+                        </td>
+                    </tr>
+                </table>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
