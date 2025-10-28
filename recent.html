@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Review the latest integer sequence submissions to the CEIS database." />
+  <meta name="keywords" content="integer sequences, recent submissions, CEIS, OEIS alternative" />
+  <meta name="author" content="Community Ran Encyclopedia of Integer Sequences (CEIS)" />
+  <title>Recent Submissions — CEIS</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Times New Roman", serif;
+      background-color: #ffffff;
+      color: #000000;
+    }
+    a {
+      color: #0000ee;
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #551a8b;
+    }
+    header {
+      background-color: #e5e5e5;
+      border-bottom: 1px solid #999;
+      padding: 8px 0;
+    }
+    .container {
+      width: 95%;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .masthead {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding: 4px 0;
+    }
+    .masthead h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+    .masthead small {
+      font-size: 14px;
+    }
+    nav {
+      margin-top: 6px;
+      border-top: 1px solid #999;
+      border-bottom: 1px solid #999;
+      padding: 4px 0;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 15px;
+    }
+    main {
+      padding: 16px 0 48px;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 22px;
+      border-bottom: 1px solid #999;
+      padding-bottom: 4px;
+    }
+    p {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .sequence-list {
+      border: 1px solid #999;
+      margin-top: 12px;
+      background-color: #fbfbfb;
+      min-height: 120px;
+    }
+    .sequence-item {
+      border-bottom: 1px solid #ccc;
+      padding: 10px 12px;
+    }
+    .sequence-item:last-child {
+      border-bottom: none;
+    }
+    .sequence-item h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+    .sequence-item small {
+      display: block;
+      margin-top: 4px;
+      color: #444;
+    }
+    .sequence-item pre {
+      margin: 8px 0;
+      font-size: 14px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .empty-state,
+    .loading-state,
+    .error-state {
+      padding: 16px;
+      text-align: center;
+      color: #555;
+      font-style: italic;
+    }
+    .error-state {
+      color: #8b0000;
+      font-style: normal;
+      font-weight: bold;
+    }
+    footer {
+      border-top: 1px solid #999;
+      padding: 14px 0;
+      text-align: center;
+      font-size: 14px;
+      background-color: #f0f0f0;
+      color: #333;
+    }
+    @media (max-width: 640px) {
+      .masthead h1 {
+        font-size: 22px;
+      }
+      nav ul {
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container masthead">
+      <h1>Community Ran Encyclopedia of Integer Sequences (CEIS)</h1>
+      <small>Recent submissions to the community-maintained sequence database.</small>
+    </div>
+    <div class="container">
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="recent.html">Recent Submissions</a></li>
+          <li><a href="search.html">Search &amp; Lookup</a></li>
+          <li><a href="faq.html">FAQ &amp; About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>Most Recent Sequences</h2>
+      <p>The eight latest submissions to the CEIS are listed below.</p>
+      <div id="recentSequences" class="sequence-list" aria-live="polite" aria-busy="true">
+        <div class="loading-state">Loading recent submissions…</div>
+      </div>
+      <noscript>
+        <div class="sequence-list">
+          <div class="error-state">
+            JavaScript is required to load recent submissions. Please enable JavaScript in your browser.
+          </div>
+        </div>
+      </noscript>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> CEIS — Community Ran Encyclopedia of Integer Sequences.
+  </footer>
+
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+    var SUPABASE_URL = "https://ydaaftyvwtwkqvsjrhfe.supabase.co";
+    var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlkYWFmdHl2d3R3a3F2c2pyaGZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE2MDE5MTAsImV4cCI6MjA3NzE3NzkxMH0.-DvvZLFVzzLplO92KQw54T1YbLo9hzRjItsgxinXvL0";
+
+    var supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      auth: { persistSession: false }
+    });
+
+    var recentContainer = document.getElementById("recentSequences");
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function formatSequenceNumber(rawNumber) {
+      if (!rawNumber) {
+        return "A??????";
+      }
+      return rawNumber;
+    }
+
+    function formatAuthor(author) {
+      if (!author) {
+        return "Anonymous";
+      }
+      var trimmed = author.trim();
+      return trimmed.length ? trimmed : "Anonymous";
+    }
+
+    function formatComments(comments) {
+      if (!comments) {
+        return "";
+      }
+      var trimmed = comments.trim();
+      if (!trimmed.length) {
+        return "";
+      }
+      return '<p>' + trimmed.replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</p>';
+    }
+
+    function showMessage(className, text) {
+      recentContainer.innerHTML = '<div class="' + className + '">' + text + '</div>';
+    }
+
+    async function fetchRecentSequences() {
+      showMessage("loading-state", "Loading recent submissions…");
+      recentContainer.setAttribute("aria-busy", "true");
+
+      try {
+        var response = await supabase
+          .from("sequences")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .limit(8);
+
+        if (response.error) {
+          throw response.error;
+        }
+
+        var data = response.data || [];
+
+        if (!data.length) {
+          showMessage("empty-state", "No sequences have been submitted yet.");
+          return;
+        }
+
+        var fragment = document.createDocumentFragment();
+
+        for (var i = 0; i < data.length; i += 1) {
+          var seq = data[i];
+          var item = document.createElement("div");
+          item.className = "sequence-item";
+
+          var sequenceNumber = formatSequenceNumber(seq.sequence_number);
+          var sequenceName = seq.name ? seq.name : "Untitled Sequence";
+          var authorLabel = formatAuthor(seq.author);
+          var createdAt = seq.created_at ? new Date(seq.created_at).toLocaleString() : "Unknown date";
+          var sequenceData = seq.data ? seq.data : "(no data)";
+          var commentsHtml = formatComments(seq.comments);
+
+          item.innerHTML =
+            '<h3>' + sequenceNumber + ' — ' + sequenceName + '</h3>' +
+            '<small>Submitted ' + createdAt + ' by ' + authorLabel + '</small>' +
+            '<pre>' + sequenceData + '</pre>' +
+            commentsHtml;
+
+          fragment.appendChild(item);
+        }
+
+        recentContainer.innerHTML = "";
+        recentContainer.appendChild(fragment);
+      } catch (error) {
+        console.error("Failed to load recent submissions:", error);
+        var message = error && error.message ? error.message : "Unable to load recent sequences.";
+        showMessage("error-state", "Error: " + message);
+      } finally {
+        recentContainer.removeAttribute("aria-busy");
+      }
+    }
+
+    fetchRecentSequences();
+
+    if (window.location.protocol === "file:") {
+      showMessage("error-state", "Warning: Serve this page via http(s) to display recent submissions.");
+      recentContainer.removeAttribute("aria-busy");
+    }
+  </script>
+</body>
+</html>
