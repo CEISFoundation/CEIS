@@ -248,7 +248,7 @@
 
           var sequenceNumber = formatSequenceNumber(seq.sequence_number);
           var sequenceName = seq.name ? seq.name : "Untitled Sequence";
-          var authorLabel = formatAuthor(seq.author);
+          var authorLabel = formatAuthor(seq.authors);
           var createdAt = seq.created_at ? new Date(seq.created_at).toLocaleString() : "Unknown date";
           var sequenceData = seq.data ? seq.data : "(no data)";
           var commentsHtml = formatComments(seq.comments);
