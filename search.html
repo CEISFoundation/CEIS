@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="en"><head><meta name="x-poe-datastore-behavior" content="local_only"><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Search the CEIS database of community-submitted integer sequences.">
+  <meta name="keywords" content="integer sequences, CEIS search, OEIS alternative">
+  <meta name="author" content="Community Ran Encyclopedia of Integer Sequences (CEIS)">
+  <title>Search &amp; Lookup — CEIS</title>
+  <style>
+    :root {
+      color-scheme: light;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Times New Roman", serif;
+      background-color: #ffffff;
+      color: #000000;
+    }
+    a {
+      color: #0000ee;
+      text-decoration: underline;
+    }
+    a:visited {
+      color: #551a8b;
+    }
+    header {
+      background-color: #e5e5e5;
+      border-bottom: 1px solid #999;
+      padding: 8px 0;
+    }
+    .container {
+      width: 95%;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .masthead {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 4px 0;
+    }
+    .masthead h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+    .masthead small {
+      font-size: 14px;
+    }
+    nav {
+      margin-top: 6px;
+      border-top: 1px solid #999;
+      border-bottom: 1px solid #999;
+      padding: 4px 0;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 15px;
+    }
+    main {
+      padding: 18px 0 48px;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 22px;
+      border-bottom: 1px solid #999;
+      padding-bottom: 4px;
+    }
+    form {
+      margin-top: 12px;
+      display: grid;
+      gap: 12px;
+      max-width: 640px;
+    }
+    label {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #777;
+      font-size: 16px;
+    }
+    button {
+      width: fit-content;
+      padding: 8px 18px;
+      font-size: 16px;
+      border: 1px solid #555;
+      background-color: #f5f5f5;
+      cursor: pointer;
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .results-container {
+      margin-top: 20px;
+      border: 1px solid #999;
+      background-color: #fbfbfb;
+      min-height: 140px;
+    }
+    .result-item {
+      border-bottom: 1px solid #ccc;
+      padding: 12px 14px;
+    }
+    .result-item:last-child {
+      border-bottom: none;
+    }
+    .result-item h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+    .result-item small {
+      display: block;
+      margin-top: 4px;
+      color: #444;
+    }
+    .result-item pre {
+      margin: 10px 0;
+      font-size: 14px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .state-message {
+      padding: 18px;
+      text-align: center;
+      font-style: italic;
+      color: #555;
+    }
+    .state-message.error {
+      color: #8b0000;
+      font-style: normal;
+      font-weight: bold;
+    }
+    footer {
+      border-top: 1px solid #999;
+      padding: 14px 0;
+      text-align: center;
+      font-size: 14px;
+      background-color: #f0f0f0;
+      color: #333;
+    }
+    @media (max-width: 640px) {
+      .masthead h1 {
+        font-size: 22px;
+      }
+      nav ul {
+        gap: 8px;
+      }
+      button {
+        width: 100%;
+        justify-self: start;
+      }
+    }
+  </style>
+<script src="https://puc.poecdn.net/authenticated_preview_page/syncedState.3f7572448765332f3047.js"></script></head>
+<body>
+  <header>
+    <div class="container masthead">
+      <h1>Community Ran Encyclopedia of Integer Sequences (CEIS)</h1>
+      <small>Search the community-maintained sequence database.</small>
+    </div>
+    <div class="container">
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="recent.html">Recent Submissions</a></li>
+          <li><a href="search.html">Search &amp; Lookup</a></li>
+          <li><a href="faq.html">FAQ &amp; About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>Search for Sequences</h2>
+      <p>Enter a sequence number (e.g., A000045), a keyword, or a list of integers to find related submissions.</p>
+
+      <form id="searchForm" autocomplete="off" novalidate="">
+        <div>
+          <label for="query">Search query</label>
+          <input id="query" name="query" type="text" required="" aria-required="true" placeholder="Example: Fibonacci, A000045, 1, 1, 2, 3, 5">
+        </div>
+        <button id="searchButton" type="submit">Search</button>
+      </form>
+
+      <div id="results" class="results-container" aria-live="polite" aria-busy="false">
+        <div class="state-message">Enter a query above to begin.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> CEIS — Community Ran Encyclopedia of Integer Sequences.
+  </footer>
+
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+    var SUPABASE_URL = "https://ydaaftyvwtwkqvsjrhfe.supabase.co";
+    var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlkYWFmdHl2d3R3a3F2c2pyaGZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE2MDE5MTAsImV4cCI6MjA3NzE3NzkxMH0.-DvvZLFVzzLplO92KQw54T1YbLo9hzRjItsgxinXvL0";
+
+    var supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      auth: { persistSession: false }
+    });
+
+    var searchForm = document.getElementById("searchForm");
+    var queryInput = document.getElementById("query");
+    var searchButton = document.getElementById("searchButton");
+    var resultsContainer = document.getElementById("results");
+    var yearEl = document.getElementById("year");
+    yearEl.textContent = new Date().getFullYear();
+
+    function escapeHtml(text) {
+      if (!text) {
+        return "";
+      }
+      return text.replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+    }
+
+    function setStateMessage(text, isError) {
+      var className = "state-message" + (isError ? " error" : "");
+      resultsContainer.innerHTML = '<div class="' + className + '">' + text + "</div>";
+    }
+
+    function renderResults(rows) {
+      if (!rows || !rows.length) {
+        setStateMessage("No sequences matched your query. Try different keywords or a shorter number list.", false);
+        return;
+      }
+
+      var fragment = document.createDocumentFragment();
+
+      for (var i = 0; i < rows.length; i += 1) {
+        var row = rows[i];
+        var item = document.createElement("div");
+        item.className = "result-item";
+
+        var seqNum = row.sequence_number ? escapeHtml(row.sequence_number) : "A??????";
+        var title = row.name ? escapeHtml(row.name) : "Untitled Sequence";
+        var author = row.author && row.author.trim() ? escapeHtml(row.author.trim()) : "Anonymous";
+        var createdAt = row.created_at ? new Date(row.created_at).toLocaleString() : "Unknown date";
+        var data = row.data ? escapeHtml(row.data) : "(no data provided)";
+        var comments = row.comments && row.comments.trim() ? "<p>" + escapeHtml(row.comments.trim()) + "</p>" : "";
+
+        item.innerHTML =
+          "<h3>" + seqNum + " — " + title + "</h3>" +
+          "<small>Submitted " + createdAt + " by " + author + "</small>" +
+          "<pre>" + data + "</pre>" +
+          comments;
+
+        fragment.appendChild(item);
+      }
+
+      resultsContainer.innerHTML = "";
+      resultsContainer.appendChild(fragment);
+    }
+
+    function disableForm(disabled) {
+      queryInput.disabled = disabled;
+      searchButton.disabled = disabled;
+      resultsContainer.setAttribute("aria-busy", disabled ? "true" : "false");
+    }
+
+    async function performSearch(event) {
+      event.preventDefault();
+
+      var query = queryInput.value.trim();
+      if (!query.length) {
+        setStateMessage("Please enter a search term before submitting.", false);
+        return;
+      }
+
+      disableForm(true);
+      setStateMessage("Searching for matching sequences…", false);
+
+      try {
+        if (window.location.protocol === "file:") {
+          throw new Error("This page must be served over http(s) to communicate with the CEIS database.");
+        }
+
+        var filters = [
+          "sequence_number.ilike.%"+ query.replace(/%/g, "\\%").replace(/_/g, "\\_") +"%",
+          "name.ilike.%"+ query.replace(/%/g, "\\%").replace(/_/g, "\\_") +"%",
+          "author.ilike.%"+ query.replace(/%/g, "\\%").replace(/_/g, "\\_") +"%"
+        ];
+
+        var numericPattern = query.replace(/\s+/g, "");
+        if (/^-?\d+(,-?\d+){1,}$/.test(query.replace(/\s+/g, ""))) {
+          filters.push("data.ilike.%"+ query.replace(/%/g, "\\%").replace(/_/g, "\\_") +"%");
+        } else if (/^-?\d+(,-?\d+){1,}$/.test(numericPattern)) {
+          filters.push("data.ilike.%"+ numericPattern.replace(/%/g, "\\%").replace(/_/g, "\\_") +"%");
+        }
+
+        var request = supabase
+          .from("sequences")
+          .select("*")
+          .or(filters.join(","))
+          .order("created_at", { ascending: false })
+          .limit(50);
+
+        var response = await request;
+
+        if (response.error) {
+          throw response.error;
+        }
+
+        renderResults(response.data || []);
+      } catch (error) {
+        var message = "An unexpected error occurred while searching.";
+        if (error) {
+          if (error.status && error.message) {
+            message = "Error " + error.status + ": " + error.message;
+          } else if (error.name === "TypeError" && error.message === "Failed to fetch") {
+            message = "Network request failed. Confirm you have an active internet connection and that this page is served over http(s).";
+          } else if (typeof error.message === "string" && error.message.length) {
+            message = error.message;
+          }
+        }
+        setStateMessage(message, true);
+        console.error("Search error:", error);
+      } finally {
+        disableForm(false);
+      }
+    }
+
+    searchForm.addEventListener("submit", performSearch);
+
+    if (window.location.protocol === "file:") {
+      setStateMessage("Warning: Searches cannot run from the local file system. Please serve this page via http:// or https://.", true);
+    }
+  </script>
+
+
+</body></html>
