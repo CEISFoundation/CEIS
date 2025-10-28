@@ -308,11 +308,11 @@
         }
 
         var request = supabase
-          .from("sequences")
-          .select("*")
-          .or(filters.join(","))
-          .order("created_at", { ascending: false })
-          .limit(50);
+        .from("sequences")
+        .select("*")
+        .or(`sequence_number.ilike.%${query}%,name.ilike.%${query}%,author.ilike.%${query}%`)
+        .order("created_at", { ascending: false })
+        .limit(50);
 
         var response = await request;
 
