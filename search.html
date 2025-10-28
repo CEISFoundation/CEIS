@@ -307,13 +307,13 @@
           filters.push("data.ilike.%"+ numericPattern.replace(/%/g, "\\%").replace(/_/g, "\\_") +"%");
         }
 
-var request = supabase
-  .from("sequences")
-  .select("*")
-  .ilike('name', `%${query}%`)
-  .limit(50);
+        var request = supabase
+          .from("sequences")
+          .select("*")
+          .or(filters.join(','))
+          .limit(50);
 
-var response = await request;
+        var response = await request;
 
         if (response.error) {
           throw response.error;
