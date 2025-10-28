@@ -194,7 +194,7 @@
         <a href="#submit">Submit</a>
         <a href="#recent">Recent</a>
         <a href="#about">About</a>
-        <a href="#help">Help</a>
+        <a href="#" onclick="showFAQ(); return false;">FAQ</a>
     </div>
     
     <div class="container">
@@ -312,6 +312,23 @@
             }
         }
 
+        function showFAQ() {
+    alert(`CEIS FAQ
+
+Q: Do I need to create an account?
+A: No! CEIS is completely anonymous. Just submit your sequence and it's instantly published.
+
+Q: How is this different from OEIS?
+A: OEIS requires registration and editorial approval. CEIS is instant, anonymous, and open to everyone.
+
+Q: Is CEIS free?
+A: Yes, completely free forever. No ads, no paywalls, no registration.
+
+Q: Can I edit or delete my submission?
+A: Since submissions are anonymous, editing is not currently supported. Double-check before submitting!`);
+}
+
+        
         async function submitSequence() {
             const sequenceData = document.getElementById('sequenceInput').value.trim();
             const name = document.getElementById('nameInput').value.trim();
